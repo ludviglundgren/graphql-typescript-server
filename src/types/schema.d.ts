@@ -53,6 +53,7 @@ interface IUser {
 __typename: "User";
 id: string;
 email: string;
+posts: Array<IPost>;
 }
 
 interface IMutation {
