@@ -3,8 +3,6 @@ import { getRepository } from "typeorm";
 import { User } from "../../../entity/User";
 import { Post } from "../../../entity/Post";
 import { isAuthenticated } from "../../../utils/isAuth";
-// import { ApolloError } from "../../../../node_modules/apollo-server-core";
-// import { GQL } from "../../../types/schema";
 
 export const resolvers: ResolverMap = {
   Query: {
@@ -12,8 +10,7 @@ export const resolvers: ResolverMap = {
       const userId = isAuthenticated(context);
 
       if (!userId) {
-        // throw new ApolloError("you are not authenticated", "404");
-        return userId;
+        return null;
       }
 
       const userRepo = getRepository(User);
