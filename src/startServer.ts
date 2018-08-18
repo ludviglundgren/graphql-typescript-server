@@ -4,7 +4,12 @@ import { createConnection } from "typeorm";
 import { genSchema } from "./utils/genSchema";
 
 export const startServer = async () => {
-  const server = new ApolloServer({ schema: genSchema() as any });
+  const server = new ApolloServer({
+    schema: genSchema() as any,
+    context: ({ req }: any) => {
+      return { token: req.headers["authorization"] };
+    }
+  });
 
   const app = express();
   server.applyMiddleware({ app });
