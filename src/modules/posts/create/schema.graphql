@@ -1,0 +1,9 @@
+input CreatePostInput {
+  title: String!
+  content: String!
+  userId: String!
+}
+
+type Mutation {
+  createPost(input: CreatePostInput!): Post
+}

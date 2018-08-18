@@ -22,9 +22,15 @@ column: number;
 
 interface IQuery {
 __typename: "Query";
+posts: Array<IPost>;
+post: IPost | null;
 users: Array<IUser>;
 user: IUser | null;
 hello: string;
+}
+
+interface IPostOnQueryArguments {
+id: string;
 }
 
 interface IUserOnQueryArguments {
@@ -35,20 +41,40 @@ interface IHelloOnQueryArguments {
 name?: string | null;
 }
 
+interface IPost {
+__typename: "Post";
+id: string;
+title: string;
+content: string;
+user: IUser;
+}
+
 interface IUser {
 __typename: "User";
 id: string;
 email: string;
+posts: Array<IPost>;
 }
 
 interface IMutation {
 __typename: "Mutation";
+createPost: IPost | null;
 register: boolean | null;
+}
+
+interface ICreatePostOnMutationArguments {
+input: ICreatePostInput;
 }
 
 interface IRegisterOnMutationArguments {
 email: string;
 password: string;
+}
+
+interface ICreatePostInput {
+title: string;
+content: string;
+userId: string;
 }
 }
 
