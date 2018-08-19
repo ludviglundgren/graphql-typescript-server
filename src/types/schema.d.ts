@@ -26,6 +26,7 @@ posts: Array<IPost>;
 post: IPost | null;
 users: Array<IUser>;
 user: IUser | null;
+me: IUser | null;
 hello: string;
 }
 
@@ -59,11 +60,17 @@ posts: Array<IPost>;
 interface IMutation {
 __typename: "Mutation";
 createPost: IPost | null;
-register: boolean | null;
+login: ILoginResponse | null;
+register: IRegisterResponse | null;
 }
 
 interface ICreatePostOnMutationArguments {
 input: ICreatePostInput;
+}
+
+interface ILoginOnMutationArguments {
+email: string;
+password: string;
 }
 
 interface IRegisterOnMutationArguments {
@@ -75,6 +82,26 @@ interface ICreatePostInput {
 title: string;
 content: string;
 userId: string;
+}
+
+interface ILoginResponse {
+__typename: "LoginResponse";
+user: IUser | null;
+authenticated: boolean | null;
+token: string | null;
+}
+
+interface IRegisterResponse {
+__typename: "RegisterResponse";
+success: boolean | null;
+authenticated: boolean | null;
+token: string | null;
+}
+
+interface IError {
+__typename: "Error";
+path: string;
+message: string;
 }
 }
 

@@ -1,5 +1,16 @@
+export interface Context {
+  req: Express.Request;
+}
+
+export type Resolver = (
+  parent: any,
+  args: any,
+  context: Context,
+  info: any
+) => any;
+
 export interface ResolverMap {
   [key: string]: {
-    [key: string]: (parent: any, args: any, context: {}, info: any) => any;
+    [key: string]: Resolver;
   };
 }
