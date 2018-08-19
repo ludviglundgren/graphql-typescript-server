@@ -61,7 +61,7 @@ interface IMutation {
 __typename: "Mutation";
 createPost: IPost | null;
 login: ILoginResponse | null;
-register: boolean | null;
+register: IRegisterResponse | null;
 }
 
 interface ICreatePostOnMutationArguments {
@@ -87,6 +87,13 @@ userId: string;
 interface ILoginResponse {
 __typename: "LoginResponse";
 user: IUser | null;
+authenticated: boolean | null;
+token: string | null;
+}
+
+interface IRegisterResponse {
+__typename: "RegisterResponse";
+success: boolean | null;
 authenticated: boolean | null;
 token: string | null;
 }

@@ -5,13 +5,7 @@ import { ResolverMap } from "../../../types/graphql-utils";
 import { User } from "../../../entity/User";
 import { invalidLogin } from "./errorMessages";
 import { getRepository } from "typeorm";
-
-const errorResponse = [
-  {
-    path: "email",
-    message: invalidLogin
-  }
-];
+import { AuthenticationError } from "../../../../node_modules/apollo-server-core";
 
 export const resolvers: ResolverMap = {
   Mutation: {
@@ -20,13 +14,13 @@ export const resolvers: ResolverMap = {
       const user = await userRepo.findOne({ where: { email } });
 
       if (!user) {
-        return errorResponse;
+        throw new AuthenticationError(invalidLogin);
       }
 
       const valid = await bcrypt.compare(password, user.password);
 
       if (!valid) {
-        return errorResponse;
+        throw new AuthenticationError(invalidLogin);
       }
 
       let token;
